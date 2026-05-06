@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Языковые строки страницы истории метрик (`admin/history.php`).
+ */
+
+$MESS['MRLEXNDR_MONITORING_HISTORY_TITLE'] = 'Мониторинг: история проверок';
+$MESS['MRLEXNDR_MONITORING_HISTORY_FILTER_METRIC'] = 'Метрика';
+$MESS['MRLEXNDR_MONITORING_HISTORY_FILTER_ALL'] = 'Все';
+$MESS['MRLEXNDR_MONITORING_HISTORY_FILTER_APPLY'] = 'Показать';
+$MESS['MRLEXNDR_MONITORING_HISTORY_HINT'] = 'Записей в выборке по фильтру: #TOTAL#. Хранятся примерно за последние 30 суток (очистка агентом).';
+$MESS['MRLEXNDR_MONITORING_HISTORY_COL_ID'] = 'ID';
+$MESS['MRLEXNDR_MONITORING_HISTORY_COL_DATE'] = 'Дата проверки';
+$MESS['MRLEXNDR_MONITORING_HISTORY_COL_CODE'] = 'Код метрики';
+$MESS['MRLEXNDR_MONITORING_HISTORY_COL_STATUS'] = 'Статус';
+$MESS['MRLEXNDR_MONITORING_HISTORY_COL_MESSAGE'] = 'Сообщение';
+$MESS['MRLEXNDR_MONITORING_HISTORY_COL_VALUE'] = 'Значение';
+$MESS['MRLEXNDR_MONITORING_HISTORY_EMPTY'] = 'Нет записей.';
+$MESS['MRLEXNDR_MONITORING_HISTORY_PAGE_PREV'] = 'Назад';
+$MESS['MRLEXNDR_MONITORING_HISTORY_PAGE_NEXT'] = 'Вперёд';
+$MESS['MRLEXNDR_MONITORING_HISTORY_PAGE_OF'] = 'Страница #PAGE# из #TOTAL#';

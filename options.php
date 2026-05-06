@@ -50,7 +50,12 @@ $aTabs = [
 
 $tabControl = new CAdminTabControl('tabControl', $aTabs);
 
-if ($request->isPost() && check_bitrix_sessid() && (string)$request->getPost('save') !== '') {
+$isSettingsSubmit = $request->getPost('save') !== null
+    || $request->getPost('apply') !== null
+    || $request->getPost('Update') !== null
+    || $request->getPost('Apply') !== null;
+
+if ($request->isPost() && check_bitrix_sessid() && $isSettingsSubmit) {
     Option::set($moduleId, 'notify_email', trim((string)$request->getPost('notify_email')));
     Option::set($moduleId, 'notify_telegram_token', trim((string)$request->getPost('notify_telegram_token')));
     Option::set($moduleId, 'notify_telegram_chat_id', trim((string)$request->getPost('notify_telegram_chat_id')));
@@ -64,6 +69,7 @@ if ($request->isPost() && check_bitrix_sessid() && (string)$request->getPost('sa
     }
     Option::set($moduleId, 'error_consecutive_threshold', (string)$threshold);
 
+    // При «подвисании» сохранения проверьте обработчики события mrlexndr.monitoring / OnRegisterCheckers (тяжёлый код блокирует ответ).
     foreach (Registry::getCheckers() as $checker) {
         $code = $checker->getCode();
 
@@ -217,6 +223,6 @@ if ($threshold <= 0) {
 </tr>
 <?php
 
-$tabControl->Buttons(['btn_apply' => false]);
+$tabControl->Buttons();
 
 $tabControl->End();

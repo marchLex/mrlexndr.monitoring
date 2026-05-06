@@ -23,7 +23,18 @@ $aMenu = [
     'icon' => 'sys_menu_icon',
     'page_icon' => 'sys_menu_icon',
     'items_id' => 'menu_mrlexndr_monitoring',
-    'items' => [],
+    'items' => [
+        [
+            'text' => GetMessage('MRLEXNDR_MONITORING_MENU_DASHBOARD'),
+            'title' => GetMessage('MRLEXNDR_MONITORING_MENU_DASHBOARD'),
+            'url' => 'mrlexndr_monitoring_dashboard.php?lang=' . LANGUAGE_ID,
+        ],
+        [
+            'text' => GetMessage('MRLEXNDR_MONITORING_MENU_HISTORY'),
+            'title' => GetMessage('MRLEXNDR_MONITORING_MENU_HISTORY'),
+            'url' => 'mrlexndr_monitoring_history.php?lang=' . LANGUAGE_ID,
+        ],
+    ],
 ];
 
 return [$aMenu];
