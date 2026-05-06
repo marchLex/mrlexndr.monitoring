@@ -53,11 +53,17 @@ class mrlexndr_monitoring extends CModule
         ModuleManager::registerModule($this->MODULE_ID);
 
         if (!Loader::includeModule($this->MODULE_ID)) {
+            ModuleManager::unRegisterModule($this->MODULE_ID);
             $APPLICATION->ThrowException(GetMessage('MRLEXNDR_MONITORING_INSTALL_MODULE_LOAD'));
             return false;
         }
 
-        $this->InstallDB();
+        if (!$this->InstallDB()) {
+            ModuleManager::unRegisterModule($this->MODULE_ID);
+            $APPLICATION->ThrowException(GetMessage('MRLEXNDR_MONITORING_INSTALL_MODULE_LOAD'));
+            return false;
+        }
+
         $this->InstallEvents();
         $this->InstallFiles();
 
@@ -105,6 +111,12 @@ class mrlexndr_monitoring extends CModule
      */
     public function InstallDB(): bool
     {
+        $this->loadMetricsTableClass();
+
+        if (!Loader::includeModule($this->MODULE_ID)) {
+            return false;
+        }
+
         $connection = Application::getConnection();
 
         if (!$connection->isTableExists(MetricsTable::getTableName())) {
@@ -131,6 +143,12 @@ class mrlexndr_monitoring extends CModule
      */
     public function UnInstallDB(): bool
     {
+        $this->loadMetricsTableClass();
+
+        if (!Loader::includeModule($this->MODULE_ID)) {
+            return false;
+        }
+
         $connection = Application::getConnection();
         $tableName = MetricsTable::getTableName();
 
@@ -283,6 +301,14 @@ class mrlexndr_monitoring extends CModule
     public function UnInstallAgents(): void
     {
         CAgent::RemoveModuleAgents($this->MODULE_ID);
+    }
+
+    /**
+     * Подключение файла ORM до вызовов MetricsTable: при Install/Uninstall include.php может быть выполнен без полной регистрации классов из карты автозагрузки.
+     */
+    private function loadMetricsTableClass(): void
+    {
+        require_once dirname(__DIR__) . '/lib/mrLexndr/Monitoring/MetricsTable.php';
     }
 
     /**

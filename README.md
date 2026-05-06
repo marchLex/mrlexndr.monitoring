@@ -136,7 +136,7 @@
 
 ## Автозагрузка классов
 
-Классы расположены по PSR-4 в **`lib/mrLexndr/Monitoring/`**. Соответствие пространства имён и путей описано в [**`.settings.php`**](.settings.php). Файл [**`include.php`**](include.php) содержит только защиту от прямого доступа по HTTP (`B_PROLOG_INCLUDED`) — без ручной регистрации классов в этом файле.
+Классы расположены в **`lib/mrLexndr/Monitoring/`**. Карта автозагрузки регистрируется в [**`include.php`**](include.php) через `\Bitrix\Main\Loader::registerAutoLoadClasses`. Также **`include.php`** проверяет `B_PROLOG_INCLUDED`, чтобы исключить прямой доступ по HTTP.
 
 ---
 
